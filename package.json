@@ -1,5 +1,5 @@
 {
-  "name": "artipub",
+  "name": "platform-management",
   "version": "0.1.4",
   "description": "Article publishing platform that automatically distributes your articles to various media channels",
   "main": "index.js",
