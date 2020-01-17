@@ -12,8 +12,8 @@ ADD . /app
 COPY --from=frontend /app/dist /frontend
 RUN cp ./backend/package.json .
 RUN npm install
-RUN sudo apt update
-RUN sudo apt install nginx
+RUN apt update
+RUN apt install nginx
 RUN cp /app/nginx/artipub.conf /etc/nginx/conf.d
 
 CMD /app/docker_init.sh
