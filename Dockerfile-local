@@ -12,7 +12,7 @@ ADD . /app
 COPY --from=frontend /app/dist /frontend
 RUN cp ./backend/package.json .
 RUN npm install
-RUN apt install nginx
+RUN yum install -y nginx
 RUN cp /app/nginx/artipub.conf /etc/nginx/conf.d
 
 CMD /app/docker_init.sh
