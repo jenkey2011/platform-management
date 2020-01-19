@@ -2,7 +2,7 @@ import React from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Card, Row } from 'antd';
 import style from './Helper.scss'
-import { TDAPP } from '../../models/kill';
+import TDAPP from '../kill';
 
 const Helper: React.FC<any> = () => {
   const onDownload = () => {

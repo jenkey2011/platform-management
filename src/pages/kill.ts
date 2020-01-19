@@ -4,4 +4,4 @@ const TDAPP = {
     },
 }
 
-export { TDAPP };
+export default TDAPP;

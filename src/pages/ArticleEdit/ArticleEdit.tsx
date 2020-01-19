@@ -14,7 +14,7 @@ import MdEditor from 'react-markdown-editor-lite';
 import style from './ArticleEdit.scss';
 import 'codemirror/mode/markdown/markdown';
 import { router } from 'umi';
-import { TDAPP } from '../../models/kill';
+import  TDAPP  from '../kill';
 
 export interface ArticleEditProps extends ConnectProps {
   article: ArticleModelState;
