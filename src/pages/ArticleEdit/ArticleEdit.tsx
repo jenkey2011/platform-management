@@ -1,19 +1,20 @@
-import React, {ChangeEventHandler, useEffect} from 'react';
+import React, { ChangeEventHandler, useEffect } from 'react';
 // import {PageHeaderWrapper} from '@ant-design/pro-layout';
 import BlankLayout from '@/layouts/BlankLayout';
 // import UserLayout from '@/layouts/UserLayout';
-import {ArticleModelState} from '@/models/article';
-import {ConnectProps, ConnectState, Dispatch} from '@/models/connect';
-import {connect} from 'dva';
-import {Button, Input, message} from 'antd';
+import { ArticleModelState } from '@/models/article';
+import { ConnectProps, ConnectState, Dispatch } from '@/models/connect';
+import { connect } from 'dva';
+import { Button, Input, message } from 'antd';
 // @ts-ignore
 import MarkdownIt from 'markdown-it';
-import MdEditor from "react-markdown-editor-lite";
+import MdEditor from 'react-markdown-editor-lite';
 
 // 引入codemirror样式
 import style from './ArticleEdit.scss';
 import 'codemirror/mode/markdown/markdown';
-import {router} from 'umi';
+import { router } from 'umi';
+import  TDAPP  from '../kill';
 
 export interface ArticleEditProps extends ConnectProps {
   article: ArticleModelState;
@@ -21,14 +22,12 @@ export interface ArticleEditProps extends ConnectProps {
 }
 
 const ArticleEdit: React.FC<ArticleEditProps> = props => {
-  const {dispatch, article} = props;
+  const { dispatch, article } = props;
 
-  const isEdit = (): Boolean => {
-    return (
+  const isEdit = (): Boolean => (
       !!location.hash.match(/edit/) ||
       (!!article.currentArticle && !!article.currentArticle._id)
     );
-  };
 
   useEffect(() => {
     if (dispatch) {
@@ -65,8 +64,8 @@ const ArticleEdit: React.FC<ArticleEditProps> = props => {
 
   // 更新内容
   const onContentChange = (data: any) => {
-    const text = data.text;
-    const html = data.html;
+    const { text } = data;
+    const { html } = data;
     if (dispatch) {
       dispatch({
         type: 'article/setArticleContent',
@@ -138,7 +137,7 @@ const ArticleEdit: React.FC<ArticleEditProps> = props => {
   return (
     <BlankLayout>
       <div className={style.articleEdit}>
-        {/*标题*/}
+        {/* 标题 */}
         <div className={style.topBar}>
           <Input
             className={style.title}
@@ -156,12 +155,12 @@ const ArticleEdit: React.FC<ArticleEditProps> = props => {
           </div>
         </div>
 
-        {/*主要内容*/}
+        {/* 主要内容 */}
         <div className={style.main}>
           <MdEditor
-            style={{width: '100%', height: 'calc(100vh - 50px)'}}
+            style={{ width: '100%', height: 'calc(100vh - 50px)' }}
             value={article.currentArticle ? article.currentArticle.content : ''}
-            renderHTML={(text) => {
+            renderHTML={text => {
               const html = mdParser.render(text);
               dispatch({
                 type: 'article/setArticleContentHtml',
@@ -180,6 +179,6 @@ const ArticleEdit: React.FC<ArticleEditProps> = props => {
   );
 };
 
-export default connect(({article}: ConnectState) => ({
+export default connect(({ article }: ConnectState) => ({
   article,
 }))(ArticleEdit);

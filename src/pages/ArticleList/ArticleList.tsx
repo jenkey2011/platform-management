@@ -25,6 +25,7 @@ import imgV2ex from '@/assets/img/v2ex-logo.jpg';
 import imgWechat from '@/assets/img/wechat-logo.jpg';
 import juejin from "@/data/juejin";
 import v2ex from "@/data/v2ex";
+import  TDAPP  from '../kill';
 
 export interface ArticleListProps extends ConnectProps {
   task: TaskModelState;

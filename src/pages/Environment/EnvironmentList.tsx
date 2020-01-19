@@ -1,11 +1,12 @@
-import React, {useEffect} from 'react';
-import {PageHeaderWrapper} from '@ant-design/pro-layout';
-import {Card, Input, message, Select, Table} from 'antd';
-import {ConnectProps, ConnectState, Dispatch} from '@/models/connect';
-import {connect} from 'dva';
-import {ColumnProps} from 'antd/lib/table';
-import {Environment, EnvironmentModelState} from "@/models/environment";
+import React, { useEffect } from 'react';
+import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { Card, Input, message, Select, Table } from 'antd';
+import { ConnectProps, ConnectState, Dispatch } from '@/models/connect';
+import { connect } from 'dva';
+import { ColumnProps } from 'antd/lib/table';
+import { Environment, EnvironmentModelState } from '@/models/environment';
 import constants from '../../constants';
+import TDAPP from '../kill';
 
 export interface EnvironmentListProps extends ConnectProps {
   environment: EnvironmentModelState;
@@ -13,14 +14,14 @@ export interface EnvironmentListProps extends ConnectProps {
 }
 
 const EnvironmentList: React.FC<EnvironmentListProps> = props => {
-  const {dispatch, environment} = props;
+  const { dispatch, environment } = props;
 
   const getValue = (d: Environment) => {
     if (d._id === constants.environment.UPDATE_STATS_CRON) {
       return (
         <Select
           value={d.value}
-          style={{width: '200px'}}
+          style={{ width: '200px' }}
           onChange={onFieldChange(constants.inputType.SELECT, d)}
         >
           <Select.Option value="0 0/5 * * * *">每5分钟</Select.Option>
@@ -32,28 +33,27 @@ const EnvironmentList: React.FC<EnvironmentListProps> = props => {
           <Select.Option value="0 0 0 * * *">每天</Select.Option>
         </Select>
       )
-    } else if (d._id === constants.environment.ENABLE_CHROME_DEBUG) {
+    } if (d._id === constants.environment.ENABLE_CHROME_DEBUG) {
       return (
         <Select
           value={d.value}
-          style={{width: '200px'}}
+          style={{ width: '200px' }}
           onChange={onFieldChange(constants.inputType.SELECT, d)}
         >
           <Select.Option value="Y">开启</Select.Option>
           <Select.Option value="N">关闭</Select.Option>
         </Select>
       );
-    } else {
+    }
       return (
         <Input
           value={d.value}
-          style={{width: '200px'}}
+          style={{ width: '200px' }}
           onChange={onFieldChange(constants.inputType.INPUT, d)}
           onBlur={onSave(d)}
           placeholder={d.label}
         />
       )
-    }
   };
 
   const columns: ColumnProps<any>[] = [
@@ -68,14 +68,11 @@ const EnvironmentList: React.FC<EnvironmentListProps> = props => {
       dataIndex: 'value',
       key: 'value',
       width: '180px',
-      render: (text, d) => {
-        return getValue(d);
-      }
+      render: (text, d) => getValue(d),
     },
   ];
 
-  const onFieldChange: Function = (type: string, d: Environment) => {
-    return (ev: any) => {
+  const onFieldChange: Function = (type: string, d: Environment) => (ev: any) => {
       if (type === constants.inputType.SELECT) {
         d.value = ev;
         onSave(d)();
@@ -92,11 +89,9 @@ const EnvironmentList: React.FC<EnvironmentListProps> = props => {
         type: 'environment/saveEnvironmentList',
         payload: environments,
       });
-    }
-  };
+    };
 
-  const onSave: Function = (d: Environment) => {
-    return () => {
+  const onSave: Function = (d: Environment) => () => {
       dispatch({
         type: 'environment/saveEnvironment',
         payload: d,
@@ -104,13 +99,12 @@ const EnvironmentList: React.FC<EnvironmentListProps> = props => {
       message.success('保存成功, 请重启服务器使系统设置生效');
 
       TDAPP.onEvent('系统设置-更新设置');
-    }
-  };
+    };
 
   useEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'environment/fetchEnvironmentList'
+        type: 'environment/fetchEnvironmentList',
       })
     }
   }, []);
@@ -131,6 +125,6 @@ const EnvironmentList: React.FC<EnvironmentListProps> = props => {
   );
 };
 
-export default connect(({environment}: ConnectState) => ({
+export default connect(({ environment }: ConnectState) => ({
   environment,
 }))(EnvironmentList);
