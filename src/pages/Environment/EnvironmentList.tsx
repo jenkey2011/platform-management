@@ -6,6 +6,7 @@ import {connect} from 'dva';
 import {ColumnProps} from 'antd/lib/table';
 import {Environment, EnvironmentModelState} from "@/models/environment";
 import constants from '../../constants';
+import { TDAPP } from '../../models/kill';
 
 export interface EnvironmentListProps extends ConnectProps {
   environment: EnvironmentModelState;

@@ -7,6 +7,7 @@ import {connect} from 'dva';
 import {ColumnProps, SelectionSelectFn, TableRowSelection} from 'antd/lib/table';
 import style from './PlatformList.scss';
 import constants from '@/constants';
+import { TDAPP } from '../../models/kill';
 
 // logo images
 import imgJuejin from '@/assets/img/juejin-logo.svg';
