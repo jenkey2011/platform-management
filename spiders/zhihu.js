@@ -11,8 +11,8 @@ class ZhihuSpider extends BaseSpider {
       await fs.mkdirSync(dirPath)
     }
 
-    // 内容
-    const content = this.article.content + `\n\n> 关注我的微信公众号：大厂小猿`
+    // 内容 自定义footer
+    const content = this.article.content + `\n\n`
 
     // 写入临时markdown文件
     const mdPath = path.join(dirPath, `${this.article._id.toString()}.md`)

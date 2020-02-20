@@ -3,7 +3,8 @@ const BaseSpider = require('./base')
 class CnblogsSpider extends BaseSpider {
 
   async inputContent(article, editorSel) {
-    const footerContent = `<br><b>关注我的微信公众号：大厂小猿</b>`
+    // 自定义footer
+    const footerContent = `<br>`
     const content = article.contentHtml + footerContent;
     const iframeWindow = document.querySelector('#Editor_Edit_EditorBody_ifr').contentWindow
     const el = iframeWindow.document.querySelector(editorSel.content)

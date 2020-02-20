@@ -96,9 +96,9 @@ class BaseSpider {
       })
     })
 
-    // 脚注内容
+    // 脚注内容 自定义footer
     this.footerContent = {
-      richText: `<br><b>关注我的微信公众号：大厂小猿</b>`,
+      richText: ``,
     }
   }
 
@@ -237,10 +237,10 @@ class BaseSpider {
   }
 
   /**
-   * 输入文章脚注
+   * 输入文章脚注 自定义footer
    */
   async inputFooter(article, editorSel) {
-    const footerContent = `\n\n> 关注我的微信公众号：大厂小猿`
+    const footerContent = `\n\n `
     const el = document.querySelector(editorSel.content)
     el.focus()
     document.execCommand('insertText', false, footerContent)

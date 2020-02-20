@@ -3,7 +3,8 @@ const constants = require('../constants')
 
 class SegmentfaultSpider extends BaseSpider {
   async inputContent(article, editorSel) {
-    const footerContent = `<br><b>关注我的微信公众号：大厂小猿</b>`
+    //   自定义footer
+    const footerContent = `<br>`
     const content = article.content + footerContent
     const el = document.querySelector('.CodeMirror')
     el.CodeMirror.setValue(content)

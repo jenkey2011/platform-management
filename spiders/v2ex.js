@@ -3,7 +3,8 @@ const constants = require('../constants')
 
 class V2exSpider extends BaseSpider {
   async inputContent(article, editorSel) {
-    const footerContent = `\n\n> 关注我的微信公众号：大厂小猿`
+    //   自定义footer
+    const footerContent = `\n\n`
     const content = article.content + footerContent
     editor.setValue(content)
   }

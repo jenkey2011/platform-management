@@ -34,7 +34,8 @@ class JianshuSpider extends BaseSpider {
    * 输入文章内容
    */
   async inputContent(article, editorSel) {
-    const footerContent = `\n\n> 关注我的微信公众号：大厂小猿`
+    //   自定义footer
+    const footerContent = `\n\n`
     const content = article.content + footerContent
     document.execCommand('insertText', false, content)
   }
